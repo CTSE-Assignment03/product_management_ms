@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: product-management-ms
-        image: adi752698/product_management_ms:v3
+        image: adi752698/product_management_ms:v4
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
