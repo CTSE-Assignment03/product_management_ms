@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctse-deployment
+  labels:
+    app: ctse-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ctse-app
+  template:
+    metadata:
+      labels:
+        app: ctse-app
+    spec:
+      containers:
+      - name: product-management-ms
+        image: adi752698/product_management_ms:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
