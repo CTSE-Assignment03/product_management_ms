@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ctse-deployment
+  name: product-deployment
   labels:
     app: ctse-app
 spec:
@@ -19,4 +19,4 @@ spec:
         image: adi752698/product_management_ms:v4
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 5000
