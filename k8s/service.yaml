@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ctse-service
+  name: product-service
   labels:
-    app: ctse-service
+    app: product-service
 spec:
   type: LoadBalancer
   ports:
