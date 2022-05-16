@@ -5,10 +5,15 @@ metadata:
   labels:
     app: ctse-app
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: ctse-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5     
   template:
     metadata:
       labels:
