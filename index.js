@@ -14,7 +14,8 @@ app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 5000;
-const URI = process.env.MONGODB_PRODUCTS_URI;
+// const URI = process.env.MONGODB_PRODUCTS_URI;
+const URI = "mongodb+srv://root:root@cluster0.kaoi1.mongodb.net/products_db?retryWrites=true&w=majority";
 
 mongoose
   .connect(URI)
