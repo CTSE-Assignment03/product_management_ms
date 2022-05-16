@@ -32,7 +32,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/$CONTAINER_IMAGE_NAME:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.CONTAINER_IMAGE_NAME }}:${{ github.sha }}
 
       #Authenticate GCP    
     - id: "auth"
