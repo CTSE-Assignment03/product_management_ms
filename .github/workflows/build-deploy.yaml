@@ -3,11 +3,12 @@ on:
   push:
     branches: [ main ]
 env:
-   DEPLOYMENT_NAME: product_management_ms
+   DEPLOYMENT_NAME: product-deployment
    PROJECT_ID: ctse-assignment-03
    GKE_CLUSTER: ctse-assignment-03-cluster
    GKE_ZONE: asia-south1-a
    CONTAINER_NAME: product-management-ms
+   CONTAINER_IMAGE_NAME: product_management_ms
    DOCKER_USERNAME: adi752698
 
 jobs:
@@ -31,7 +32,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/product_management_ms:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/$CONTAINER_IMAGE_NAME:${{ github.sha }}
 
       #Authenticate GCP    
     - id: "auth"
@@ -51,6 +52,6 @@ jobs:
     - name: Execute Deployment
       run: |-
         kubectl apply -f ./k8s/deployment.yaml -f ./k8s/service.yaml
-        kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$DOCKER_USERNAME/$DEPLOYMENT_NAME:${{ github.sha }}
+        kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$DOCKER_USERNAME/$CONTAINER_IMAGE_NAME:${{ github.sha }}
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
