@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const productRoutes = require('./routes');
-const ProductModel = require("./model");
 
 const app = express();
 
@@ -14,8 +13,7 @@ app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 5000;
-// const URI = process.env.MONGODB_PRODUCTS_URI;
-const URI = "mongodb+srv://root:root@cluster0.kaoi1.mongodb.net/products_db?retryWrites=true&w=majority";
+const URI = process.env.MONGODB_PRODUCTS_URI;
 
 mongoose
   .connect(URI)
@@ -27,19 +25,6 @@ mongoose
   });
 
 app.get("/", (req,res) => {res.send("AI DEVIANTS - updated!")})
-app.get("/fetchAll",async (req,res) => {
-  try {
-    const allBooks = await ProductModel.find();
-    res.status(200).send({
-      allBooks,
-    });
-  } catch (error) {
-    res.status(500).json({
-      error,
-      desc: "Error occurred in getAllBooks",
-    });
-  }
-}) 
 app.use("/api/products",productRoutes);
 
 //event loop for server
