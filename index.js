@@ -24,7 +24,7 @@ mongoose
     console.log("MongoDB Connection Failed - " + err);
   });
 
-app.get("/", (req,res) => {res.send("AI DEVIANTS")}) 
+app.get("/", (req,res) => {res.send("AI DEVIANTS - updated!")}) 
 app.use("/api/products",productRoutes);
 
 //event loop for server
