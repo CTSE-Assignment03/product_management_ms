@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const productRoutes = require('./routes');
+const ProductModel = require("./model");
 
 const app = express();
 
@@ -24,7 +25,20 @@ mongoose
     console.log("MongoDB Connection Failed - " + err);
   });
 
-app.get("/", (req,res) => {res.send("AI DEVIANTS - updated!")}) 
+app.get("/", (req,res) => {res.send("AI DEVIANTS - updated!")})
+app.get("/fetchAll",async (req,res) => {
+  try {
+    const allBooks = await ProductModel.find();
+    res.status(200).send({
+      allBooks,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error,
+      desc: "Error occurred in getAllBooks",
+    });
+  }
+}) 
 app.use("/api/products",productRoutes);
 
 //event loop for server
