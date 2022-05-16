@@ -50,7 +50,7 @@ jobs:
       #Deploy 
     - name: Execute Deployment
       run: |-
-        kubectl apply -f deployment.yaml -f service.yaml
+        kubectl apply -f ./k8s/deployment.yaml -f ./k8s/service.yaml
         kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$DOCKER_USERNAME/$DEPLOYMENT_NAME:${{ github.sha }}
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
